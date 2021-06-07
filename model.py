@@ -1,7 +1,10 @@
 from FrEIA.framework import *
 from FrEIA.modules import *
+
 from coupling_layer import Block
 from problayer import VBLinear
+import config as c
+
 import time
 
 device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
@@ -33,7 +36,7 @@ class BlockConstructor(nn.Module):
 		return x
 
 class INN:
-	def __init__(self, in_dim=2, num_coupling_layers=6, internal_size=256, num_layers=2, init_zeros=False,dropout=False, params={}):
+	def __init__(self, in_dim=2, num_coupling_layers=1, internal_size=16, num_layers=1, init_zeros=False,dropout=False):
 
 		self.in_dim = in_dim
 		self.n_blocks = num_coupling_layers
@@ -41,17 +44,6 @@ class INN:
 		self.num_layers = num_layers
 		self.clamping = 1
 		self.device = device
-
-		self.lr = params['lr']
-		self.betas = params['betas']
-		self.weight_decay = params['decay']
-		#self.eps = params['eps']
-		self.gamma = params['gamma']
-		self.on_shell = params['on_shell']
-		self.n_epochs = params['n_epochs']
-		self.batch_size = params['batch_size']
-
-		#self.params_trainable = list(filter(lambda p: p.requires_grad, self.parameters()))
 
 	def define_model_architecture(self): 
 	
@@ -94,16 +86,15 @@ class INN:
 		
 		self.optim = torch.optim.Adam(
 			self.params_trainable, 
-			lr=self.lr, 
-			betas=self.betas, 
+			lr=c.lr, 
+			betas=c.betas, 
 			eps=1e-6, 
-			# check with no weight_decay
-			weight_decay=self.weight_decay
+			weight_decay=c.weight_decay
 		)
 		self.scheduler = torch.optim.lr_scheduler.StepLR(
 			optimizer=self.optim,
 			step_size=1,
-			gamma = self.gamma
+			gamma = c.gamma
 			)
 		"""
 		self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
@@ -121,7 +112,7 @@ class INN:
 		self.train_loader = torch.utils.data.DataLoader(
 			torch.from_numpy(data),
 			#torch.utils.data.TensorDataset(data_x),
-			batch_size=self.batch_size, 
+			batch_size=c.batch_size, 
 			shuffle=True, 
 			drop_last=True,
 		)
