@@ -38,12 +38,9 @@ variational = False
 # Architecture: #
 #################
 
-# For cond. generation:
-n_blocks = 2
+n_blocks = 1
 n_units = 16
 n_layers = 2
-
-fc_dropout = 0.0
 
 ####################
 # Logging/preview: #

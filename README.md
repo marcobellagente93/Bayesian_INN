@@ -6,4 +6,11 @@ Implementation is in PyTorch 1.8.0. Features included are:
 * MMD loss
 * Train on weighted points
 
-Use data/generate\_toy to generate linear and quadratic toy datasets
+## Usage
+```
+clone the repository
+git clone git@github.com:marcobellagente93/Bayesian_INN.git
+generate linear and quadratic toy datasets via data/generate\_toy
+Run the code
+python train.py
+```

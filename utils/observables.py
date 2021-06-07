@@ -37,113 +37,12 @@ class Observable(object):
 
 		return np.array(Ps)
 
-	def roll_x(self, x, particle_id = [0]):
-		return x[:,0]
-
-	def roll_y(self, x, particle_id = [0]):
-		return x[:,1]
-
-	def roll_2(self, x, particle_id = [0]):
-		return x[:,2]
-
-	def roll_3(self, x, particle_id = [0]):
-		return x[:,3]
-
-	def roll_4(self, x, particle_id = [0]):
-		return x[:,4]
-
-	def roll_5(self, x, particle_id = [0]):
-		return x[:,5]
-
-	def roll_6(self, x, particle_id = [0]):
-		return x[:,6]
-
-	def roll_7(self, x, particle_id = [0]):
-		return x[:,7]
-
-	def roll_8(self, x, particle_id = [0]):
-		return x[:,9]
-
-	def roll_9(self, x, particle_id = [0]):
-		return x[:,9]
-
-	def roll_10(self, x, particle_id = [0]):
-		return x[:,10]
-
-	def roll_11(self, x, particle_id = [0]):
-		return x[:,11]
-
 	def coordinate_0(self, x, particle_id = [0]):
 		return x[:,0]
 
 	def coordinate_1(self, x, particle_id = [0]):
 		return x[:,1]
 
-	def coordinate_2(self, x, particle_id = [0]):
-		return x[:,2]
-
-	def coordinate_3(self, x, particle_id = [0]):
-		return x[:,3]
-
-	def coordinate_4(self, x, particle_id = [0]):
-		return x[:,4]
-
-	def coordinate_5(self, x, particle_id = [0]):
-		return x[:,5]
-
-	def coordinate_6(self, x, particle_id = [0]):
-		return x[:,6]
-
-	def coordinate_7(self, x, particle_id = [0]):
-		return x[:,7]
-
-	def coordinate_8(self, x, particle_id = [0]):
-		return x[:,8]
-
-	def coordinate_9(self, x, particle_id = [0]):
-		return x[:,9]
-
-	def coordinate_10(self, x, particle_id = [0]):
-		return x[:,10]
-
-	def coordinate_11(self, x, particle_id = [0]):
-		return x[:,11]
-
-	def coordinate_12(self, x, particle_id = [0]):
-		return x[:,12]
-
-	def coordinate_13(self, x, particle_id = [0]):
-		return x[:,13]
-
-	def coordinate_14(self, x, particle_id = [0]):
-		return x[:,14]
-
-	def coordinate_15(self, x, particle_id = [0]):
-		return x[:,15]
-
-	def coordinate_16(self, x, particle_id = [0]):
-		return x[:,16]
-
-	def coordinate_17(self, x, particle_id = [0]):
-		return x[:,17]
-
-	def coordinate_18(self, x, particle_id = [0]):
-		return x[:,18]
-
-	def coordinate_19(self, x, particle_id = [0]):
-		return x[:,19]
-
-	def coordinate_20(self, x, particle_id = [0]):
-		return x[:,20]
-
-	def coordinate_21(self, x, particle_id = [0]):
-		return x[:,21]
-
-	def coordinate_22(self, x, particle_id = [0]):
-		return x[:,22]
-
-	def coordinate_23(self, x, particle_id = [0]):
-		return x[:,23]
 
 	def energy(self, x, particle_id = [0]):
 		return self.momentum(x, 0, particle_id)

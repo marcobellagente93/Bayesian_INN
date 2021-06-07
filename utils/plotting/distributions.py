@@ -92,13 +92,13 @@ class Distribution(Observable):
 		 # Particle_id, observable, bins, range, x_label, log_scale
 
 		args = {			 
-			'x' : ([0], self.roll_x, 50, (-6.2,6.2) ,r'$x$', r'x',False),
-			'y' : ([0], self.roll_y, 50, (-6.2,6.2) ,r'$y$', r'y',False),
+			'x' : ([0], self.coordinate_0, 50, (-0.2,1.2) ,r'$x$', r'x',False),
+			'y' : ([0], self.coordinate_1, 50, (-0.2,1.2) ,r'$y$', r'y',False),
 		}	 
 
 		args2 = {			 
-			'x' : ([0], self.roll_x, 50, (-6.2,6.2) ,r'$x$', r'x',False),
-			'y' : ([0], self.roll_y, 50, (-6.2,6.2) ,r'$y$', r'y',False),
+			'x' : ([0], self.coordinate_0, 50, (-0.2,1.2) ,r'$x$', r'x',False),
+			'y' : ([0], self.coordinate_1, 50, (-0.2,1.2) ,r'$y$', r'y',False),
 		}
 	 
 		self.args = args
