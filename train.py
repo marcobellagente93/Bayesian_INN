@@ -31,17 +31,7 @@ device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
 
 train_loader, validate_loader, dataset_size, data_shape, scales = Loader(c.dataset, c.batch_size, c.test, c.scaler, c.on_shell, c.mom_cons, c.weighted)
 
-train_params = {
-	'lr': c.lr,
-	'betas': [0.9, 0.999],
-	'decay': c.weight_decay,
-	'gamma': c.gamma,
-	'on_shell': c.on_shell,
-	'n_epochs': c.n_epochs,
-	'batch_size': c.batch_size
-	}
-
-Flow = INN(num_coupling_layers=c.n_blocks, in_dim=data_shape, num_layers=c.n_layers, internal_size=c.n_units, params=train_params)
+Flow = INN(num_coupling_layers=c.n_blocks, in_dim=data_shape, num_layers=c.n_layers, internal_size=c.n_units)
 Flow.define_model_architecture()
 Flow.set_optimizer()
 
@@ -50,17 +40,11 @@ print('Total parameters: %d' % sum([np.prod(p.size()) for p in Flow.params_train
 
 if c.adversarial:
 	# Target space discriminator
-	D = netD(nz=data_shape, n_layers=5, n_units=30, params=train_params)
-	#D = netD(nz=data_shape, n_layers=int(c.n_layers), n_units=int(c.n_units), params=train_params)
+	D = netD(nz=data_shape, n_layers=int(c.n_layers), n_units=int(c.n_units), params=train_params)
 	D.set_optimizer()
 	D.print_network()
 	D.to(device)
 
-	# Latent space discriminator
-	#Dlat = netD(nz=data_shape, n_layers=int(c.n_layers), n_units=int(c.n_units), params=train_params)
-	#Dlat.set_optimizer()
-	#Dlat.print_network()
-	#Dlat.to(device)
 try:
 
 	log_dir = c.save_dir
@@ -97,8 +81,6 @@ try:
 				if c.adversarial:
 					D.train
 					D.zero_grad()
-					#Dlat.train
-					#Dlat.zero_grad()
 	
 				if c.weighted:
 					weights = events[:,-1] 
@@ -137,7 +119,8 @@ try:
 
 						mass_real = get_masses(events, [[0,1]]).T
 						mass_fake = get_masses(inv, [[0,1]]).T
-
+						
+						# Specify topology
 						loss = (c.lambda_mmd + (epoch * 0.0005)) * mmd(mass_fake, mass_real, [100, 10, 1])
 
 					if c.adversarial:
